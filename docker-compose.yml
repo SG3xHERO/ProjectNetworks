@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  projectnetworks-site:
+    build: .
+    container_name: projectnetworks-site
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    volumes:
+      - ./:/usr/share/nginx/html:ro
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
