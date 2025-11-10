@@ -6,7 +6,7 @@ services:
     container_name: projectnetworks-site
     restart: unless-stopped
     ports:
-      - "8081:80"
+      - "8083:80"
     volumes:
       - ./:/usr/share/nginx/html:ro
     networks:
