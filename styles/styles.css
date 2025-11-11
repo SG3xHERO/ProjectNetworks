@@ -847,6 +847,42 @@ section {
   50% { box-shadow: 0 0 40px rgba(219, 1, 249, 0.6); }
 }
 
+.featured-buttons {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.featured-buttons .btn {
+  flex: 1;
+  min-width: 200px;
+}
+
+.installation-note {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  background: rgba(219, 1, 249, 0.05);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+}
+
+.note-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.note-content svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.note-text {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
 /* ========================================
    11. Sister Sites Section
    ======================================== */
