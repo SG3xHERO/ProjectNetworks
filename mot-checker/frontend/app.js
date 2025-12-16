@@ -143,11 +143,9 @@ function displayMotResults(data) {
   const testResult = latestTest.testResult;
   
   // Debug: Log the entire test object to see structure
-  console.log('Latest test object:', latestTest);
-  console.log('Latest test RFR items:', latestTest.rfrAndComments);
-  console.log('All available keys:', Object.keys(latestTest));
-  if (latestTest.rfrAndComments && latestTest.rfrAndComments.length > 0) {
-    console.log('Sample RFR item:', latestTest.rfrAndComments[0]);
+  console.log('Latest test defects:', latestTest.defects);
+  if (latestTest.defects && latestTest.defects.length > 0) {
+    console.log('Sample defect:', latestTest.defects[0]);
   }
   
   let html = `
@@ -193,7 +191,7 @@ function displayMotResults(data) {
         </div>
       </div>
       
-      ${displayRFRItems(latestTest.rfrAndComments)}
+      ${displayRFRItems(latestTest.defects)}
       ${displayTestHistory(motTests)}
     </div>
   `;
@@ -348,7 +346,7 @@ function displayTestHistory(tests) {
   `;
   
   tests.forEach((test, index) => {
-    const hasIssues = test.rfrAndComments && test.rfrAndComments.length > 0;
+    const hasIssues = test.defects && test.defects.length > 0;
     const testId = `test-${index}`;
     
     html += `
@@ -367,7 +365,7 @@ function displayTestHistory(tests) {
           </div>
           ${hasIssues ? `
             <div id="${testId}" class="timeline-details" style="display: none;">
-              ${displayRFRItems(test.rfrAndComments)}
+              ${displayRFRItems(test.defects)}
             </div>
           ` : ''}
         </div>
