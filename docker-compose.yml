@@ -39,13 +39,13 @@ services:
 
   # MOT Checker Frontend (Static Files)
   mot-checker-frontend:
-    image: nginx:alpine
+    build:
+      context: ./mot-checker
+      dockerfile: Dockerfile.frontend
     container_name: mot-checker-frontend
     restart: unless-stopped
     ports:
       - "8085:80"
-    volumes:
-      - ./mot-checker/frontend:/usr/share/nginx/html:ro
     networks:
       - web
     healthcheck:
