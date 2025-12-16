@@ -142,10 +142,12 @@ function displayMotResults(data) {
   const latestTest = motTests[0];
   const testResult = latestTest.testResult;
   
-  // Debug: Log the RFR items to console
+  // Debug: Log the entire test object to see structure
+  console.log('Latest test object:', latestTest);
   console.log('Latest test RFR items:', latestTest.rfrAndComments);
+  console.log('All available keys:', Object.keys(latestTest));
   if (latestTest.rfrAndComments && latestTest.rfrAndComments.length > 0) {
-    console.log('Sample item:', latestTest.rfrAndComments[0]);
+    console.log('Sample RFR item:', latestTest.rfrAndComments[0]);
   }
   
   let html = `
@@ -536,9 +538,12 @@ function initMobileMenu() {
 // Toggle test details
 function toggleTestDetails(testId) {
   const details = document.getElementById(testId);
-  const icon = details.previousElementSibling.querySelector('.expand-icon');
+  if (!details) return;
   
-  if (details.style.display === 'none') {
+  const header = details.previousElementSibling;
+  const icon = header ? header.querySelector('.expand-icon') : null;
+  
+  if (details.style.display === 'none' || details.style.display === '') {
     details.style.display = 'block';
     if (icon) icon.style.transform = 'rotate(180deg)';
   } else {
