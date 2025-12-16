@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # Main Project Networks Website
   projectnetworks-site:
     build: .
     container_name: projectnetworks-site
@@ -9,6 +10,50 @@ services:
       - "8083:80"
     networks:
       - web
+
+  # MOT Checker Backend
+  mot-checker-backend:
+    build:
+      context: ./mot-checker/backend
+      dockerfile: Dockerfile
+    container_name: mot-checker-backend
+    restart: unless-stopped
+    environment:
+      - DVLA_CLIENT_ID=${DVLA_CLIENT_ID}
+      - DVLA_CLIENT_SECRET=${DVLA_CLIENT_SECRET}
+      - DVLA_API_KEY=${DVLA_API_KEY}
+      - DVLA_SCOPE_URL=${DVLA_SCOPE_URL}
+      - DVLA_TOKEN_URL=${DVLA_TOKEN_URL}
+      - API_SECRET_KEY=${API_SECRET_KEY}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-https://mot.projectnetworks.co.uk}
+    networks:
+      - web
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # MOT Checker Frontend (Nginx)
+  mot-checker-nginx:
+    build:
+      context: ./mot-checker
+      dockerfile: ./nginx/Dockerfile
+    container_name: mot-checker-nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - mot-checker-backend
+    networks:
+      - web
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
 
 networks:
   web:
