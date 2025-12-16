@@ -142,12 +142,6 @@ function displayMotResults(data) {
   const latestTest = motTests[0];
   const testResult = latestTest.testResult;
   
-  // Debug: Log the entire test object to see structure
-  console.log('Latest test defects:', latestTest.defects);
-  if (latestTest.defects && latestTest.defects.length > 0) {
-    console.log('Sample defect:', latestTest.defects[0]);
-  }
-  
   let html = `
     <div class="result-card">
       <div class="result-header">
@@ -202,12 +196,6 @@ function displayMotResults(data) {
 
 // Display Valuation Results
 function displayValuationResults(data) {
-  console.log('Valuation data.data:', data.data);
-  console.log('MOT tests:', data.data?.motTests);
-  if (data.data?.motTests && data.data.motTests.length > 0) {
-    console.log('Latest test from valuation:', data.data.motTests[0]);
-  }
-  
   const valuation = data.valuation;
   const recommendation = getRecommendationDetails(valuation.recommendation);
   
@@ -280,13 +268,13 @@ function displayValuationResults(data) {
           <div class="finance-item">
             <span class="finance-label">Est. Repairs</span>
             <span class="finance-value">£${Number(estimatedRepairs).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
+            <small class="finance-range">Range: £${Number(repairsMin).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} - £${Number(repairsMax).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</small>
           </div>
           <div class="finance-item">
             <span class="finance-label">Total Cost</span>
             <span class="finance-value highlight">£${Number(totalCost).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
           </div>
         </div>
-        <p class="finance-note">Repair estimates: £${Number(repairsMin).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} - £${Number(repairsMax).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
       </div>
       
       ${data.data?.motTests && data.data.motTests.length > 0 ? `
@@ -316,15 +304,8 @@ function displayRFRItems(items) {
     return '';
   }
   
-  // Debug: Log all item types to see what we're filtering
-  console.log('Defect items:', items);
-  console.log('Defect types:', items.map(item => item.type));
-  
   const failures = items.filter(item => item.type === 'FAIL' || item.type === 'PRS' || item.type === 'MAJOR' || item.type === 'DANGEROUS');
   const advisories = items.filter(item => item.type === 'ADVISORY' || item.type === 'USER ENTERED' || item.type === 'MINOR');
-  
-  console.log('Filtered failures:', failures.length);
-  console.log('Filtered advisories:', advisories.length);
   
   // If no failures or advisories after filtering, don't show anything
   if (failures.length === 0 && advisories.length === 0) {
@@ -624,6 +605,14 @@ style.textContent = `
   
   .finance-value.highlight {
     color: var(--color-primary);
+  }
+  
+  .finance-range {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-subtle);
+    margin-top: var(--space-1);
+    font-weight: 400;
   }
   
   .rfr-section, .test-history, .factors-section, .score-breakdown, .financial-breakdown {
