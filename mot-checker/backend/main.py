@@ -51,9 +51,9 @@ RATE_LIMIT_WINDOW = 60  # seconds
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=ALLOWED_ORIGINS,  # Only allow your domains
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -220,12 +220,10 @@ async def health_check():
 @app.post("/api/mot/lookup")
 async def lookup_mot(
     mot_request: MOTRequest,
-    request: Request,
-    api_key: str = Depends(verify_api_key)
+    request: Request
 ):
     """
     Look up MOT history for a vehicle
-    Requires valid API key in X-API-Key header
     """
     if not DVLA_CLIENT_ID or not DVLA_CLIENT_SECRET:
         raise HTTPException(status_code=500, detail="DVLA API not configured")
@@ -269,8 +267,7 @@ async def lookup_mot(
 @app.post("/api/mot/valuation")
 async def calculate_valuation(
     valuation_request: ValuationRequest,
-    request: Request,
-    api_key: str = Depends(verify_api_key)
+    request: Request
 ):
     """
     Calculate vehicle valuation based on MOT history
@@ -322,7 +319,7 @@ async def calculate_valuation(
 
 
 @app.get("/api/repair-costs")
-async def get_repair_costs(api_key: str = Depends(verify_api_key)):
+async def get_repair_costs():
     """
     Get average repair costs for common MOT failures
     """

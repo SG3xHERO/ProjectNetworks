@@ -71,8 +71,7 @@ async function handleMotLookup(e) {
     const response = await fetch(`${CONFIG.apiUrl}/api/mot/lookup`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'X-API-Key': CONFIG.apiKey
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ registration })
     });
@@ -107,8 +106,7 @@ async function handleValuation(e) {
     const response = await fetch(`${CONFIG.apiUrl}/api/mot/valuation`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'X-API-Key': CONFIG.apiKey
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ 
         registration,
