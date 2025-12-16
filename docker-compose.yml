@@ -24,8 +24,8 @@ services:
       - DVLA_CLIENT_ID=${DVLA_CLIENT_ID}
       - DVLA_CLIENT_SECRET=${DVLA_CLIENT_SECRET}
       - DVLA_API_KEY=${DVLA_API_KEY}
-      - DVLA_SCOPE_URL=${DVLA_SCOPE_URL}
-      - DVLA_TOKEN_URL=${DVLA_TOKEN_URL}
+      - DVLA_SCOPE_URL=${DVLA_SCOPE_URL:-https://tapi.dvsa.gov.uk/.default}
+      - DVLA_TOKEN_URL=${DVLA_TOKEN_URL:-https://login.microsoftonline.com/a455b827-244f-4c97-b5b4-ce5d13b4d00c/oauth2/v2.0/token}
       - API_SECRET_KEY=${API_SECRET_KEY}
       - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-https://mot.projectnetworks.co.uk}
     networks:

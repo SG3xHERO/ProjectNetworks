@@ -142,6 +142,12 @@ function displayMotResults(data) {
   const latestTest = motTests[0];
   const testResult = latestTest.testResult;
   
+  // Debug: Log the RFR items to console
+  console.log('Latest test RFR items:', latestTest.rfrAndComments);
+  if (latestTest.rfrAndComments && latestTest.rfrAndComments.length > 0) {
+    console.log('Sample item:', latestTest.rfrAndComments[0]);
+  }
+  
   let html = `
     <div class="result-card">
       <div class="result-header">
