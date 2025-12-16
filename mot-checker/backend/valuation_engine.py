@@ -124,8 +124,8 @@ class ValuationEngine:
         
         total_failures = 0
         for test in recent_tests:
-            rfr_items = test.get("rfrAndComments", [])
-            failures = [item for item in rfr_items if item.get("type") == "FAIL"]
+            defects = test.get("defects", [])
+            failures = [item for item in defects if item.get("type") in ["FAIL", "MAJOR", "DANGEROUS"]]
             total_failures += len(failures)
         
         # Score inversely proportional to failures
@@ -145,9 +145,9 @@ class ValuationEngine:
         dangerous_count = 0
         
         for test in mot_tests[:3]:  # Recent tests
-            rfr_items = test.get("rfrAndComments", [])
-            for item in rfr_items:
-                if item.get("dangerous", False):
+            defects = test.get("defects", [])
+            for item in defects:
+                if item.get("dangerous", False) or item.get("type") == "DANGEROUS":
                     dangerous_count += 1
         
         if dangerous_count == 0:
@@ -216,12 +216,12 @@ class ValuationEngine:
     def _estimate_immediate_repairs(self, mot_tests: List[Dict]) -> Dict:
         """Estimate costs for immediate repairs needed"""
         latest_test = mot_tests[0]
-        rfr_items = latest_test.get("rfrAndComments", [])
+        defects = latest_test.get("defects", [])
         
-        # Only count failures and dangerous advisories
+        # Include failures, majors, dangerous items, and advisories for cost estimation
         immediate_issues = [
-            item for item in rfr_items
-            if item.get("type") == "FAIL" or item.get("dangerous", False)
+            item for item in defects
+            if item.get("type") in ["FAIL", "MAJOR", "DANGEROUS", "ADVISORY", "MINOR"]
         ]
         
         return calculate_total_repair_costs(immediate_issues)
@@ -251,14 +251,24 @@ class ValuationEngine:
             risks.append(
                 f"💰 High estimated repair costs (£{repair_costs['total_average_cost']:.2f})"
             )
+        elif repair_costs["total_average_cost"] > 500:
+            risks.append(
+                f"💰 Moderate repair costs expected (£{repair_costs['total_average_cost']:.2f})"
+            )
         
         if self._count_recent_failures(mot_tests) >= 2:
             risks.append("⚠️ Multiple recent MOT failures")
         
-        # Check for corrosion
+        # Check for specific issues
+        latest_defects = mot_tests[0].get("defects", [])
+        major_count = sum(1 for d in latest_defects if d.get("type") in ["MAJOR", "FAIL"])
+        if major_count > 0:
+            risks.append(f"⚠️ {major_count} major issue(s) in latest MOT")
+        
+        # Check for corrosion in recent tests
         for test in mot_tests[:2]:
-            rfr_items = test.get("rfrAndComments", [])
-            for item in rfr_items:
+            defects = test.get("defects", [])
+            for item in defects:
                 if "corrosion" in item.get("text", "").lower():
                     risks.append("🔧 Corrosion issues detected")
                     break
@@ -289,10 +299,13 @@ class ValuationEngine:
         
         # Check for clean recent tests
         latest_test = mot_tests[0]
-        rfr_count = len(latest_test.get("rfrAndComments", []))
+        defects = latest_test.get("defects", [])
+        advisory_count = sum(1 for d in defects if d.get("type") in ["ADVISORY", "MINOR"])
         
-        if rfr_count == 0:
+        if len(defects) == 0:
             positives.append("🎯 Latest MOT passed with no advisories")
+        elif advisory_count > 0 and len(defects) == advisory_count:
+            positives.append(f"✅ Latest MOT passed with only {advisory_count} minor advisory/advisories")
         
         if not positives:
             positives.append("Some positive factors found")
