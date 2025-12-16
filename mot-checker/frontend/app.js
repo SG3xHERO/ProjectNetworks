@@ -294,11 +294,16 @@ function displayValuationResults(data) {
 // Helper: Display RFR Items
 function displayRFRItems(items) {
   if (!items || items.length === 0) {
-    return '<div class="no-issues">✅ No advisories or failures recorded</div>';
+    return '';
   }
   
-  const failures = items.filter(item => item.type === 'FAIL');
-  const advisories = items.filter(item => item.type === 'ADVISORY' || item.type === 'USER ENTERED');
+  const failures = items.filter(item => item.type === 'FAIL' || item.type === 'PRS' || item.type === 'MAJOR' || item.type === 'DANGEROUS');
+  const advisories = items.filter(item => item.type === 'ADVISORY' || item.type === 'USER ENTERED' || item.type === 'MINOR');
+  
+  // If no failures or advisories after filtering, don't show anything
+  if (failures.length === 0 && advisories.length === 0) {
+    return '<div class="no-issues">✅ No advisories or failures recorded</div>';
+  }
   
   let html = '<div class="rfr-section">';
   
@@ -782,6 +787,7 @@ style.textContent = `
   
   .no-issues {
     padding: var(--space-6);
+    margin-top: var(--space-6);
     text-align: center;
     background: rgba(34, 197, 94, 0.1);
     border: 1px solid rgba(34, 197, 94, 0.3);
