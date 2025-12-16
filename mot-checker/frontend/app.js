@@ -202,23 +202,22 @@ function displayMotResults(data) {
 
 // Display Valuation Results
 function displayValuationResults(data) {
-  console.log('Valuation response data:', data);
-  console.log('Financial analysis:', data.valuation?.financial_analysis);
+  console.log('Valuation data.data:', data.data);
+  console.log('MOT tests:', data.data?.motTests);
+  if (data.data?.motTests && data.data.motTests.length > 0) {
+    console.log('Latest test from valuation:', data.data.motTests[0]);
+  }
   
   const valuation = data.valuation;
   const recommendation = getRecommendationDetails(valuation.recommendation);
   
   // Safely access financial analysis data
   const financial = valuation.financial_analysis || {};
-  console.log('Financial object:', financial);
-  
   const askingPrice = financial.asking_price || 0;
   const estimatedRepairs = financial.estimated_repairs || 0;
   const totalCost = financial.total_estimated_cost || askingPrice;
   const repairsMin = financial.estimated_repairs_min || 0;
   const repairsMax = financial.estimated_repairs_max || 0;
-  
-  console.log('Values:', { askingPrice, estimatedRepairs, totalCost, repairsMin, repairsMax });
   
   let html = `
     <div class="result-card">
@@ -290,6 +289,13 @@ function displayValuationResults(data) {
         <p class="finance-note">Repair estimates: £${Number(repairsMin).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} - £${Number(repairsMax).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
       </div>
       
+      ${data.data?.motTests && data.data.motTests.length > 0 ? `
+        <div class="mot-summary">
+          <h3>Latest MOT Status</h3>
+          ${displayRFRItems(data.data.motTests[0].defects)}
+        </div>
+      ` : ''}
+      
       ${displayFactors('Risk Factors', valuation.risk_factors || [], 'warning')}
       ${displayFactors('Positive Factors', valuation.positive_factors || [], 'success')}
       ${displayScoreBreakdown(valuation.scores)}
@@ -310,8 +316,15 @@ function displayRFRItems(items) {
     return '';
   }
   
+  // Debug: Log all item types to see what we're filtering
+  console.log('Defect items:', items);
+  console.log('Defect types:', items.map(item => item.type));
+  
   const failures = items.filter(item => item.type === 'FAIL' || item.type === 'PRS' || item.type === 'MAJOR' || item.type === 'DANGEROUS');
   const advisories = items.filter(item => item.type === 'ADVISORY' || item.type === 'USER ENTERED' || item.type === 'MINOR');
+  
+  console.log('Filtered failures:', failures.length);
+  console.log('Filtered advisories:', advisories.length);
   
   // If no failures or advisories after filtering, don't show anything
   if (failures.length === 0 && advisories.length === 0) {
