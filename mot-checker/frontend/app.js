@@ -129,6 +129,15 @@ async function handleValuation(e) {
   }
 }
 
+// Check if MOT is expired
+function isMotExpired(expiryDate) {
+  if (!expiryDate) return false;
+  const expiry = new Date(expiryDate);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return expiry < today;
+}
+
 // Display MOT Results
 function displayMotResults(data) {
   const motData = data.data;
@@ -141,6 +150,7 @@ function displayMotResults(data) {
   
   const latestTest = motTests[0];
   const testResult = latestTest.testResult;
+  const motExpired = isMotExpired(latestTest.expiryDate);
   
   let html = `
     <div class="result-card">
@@ -158,6 +168,20 @@ function displayMotResults(data) {
           ${testResult}
         </span>
       </div>
+      
+      ${motExpired ? `
+        <div class="alert-box alert-danger">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <div>
+            <strong>⚠️ MOT EXPIRED</strong>
+            <p>This vehicle's MOT expired on ${formatDate(latestTest.expiryDate)}. Will require an in-person inspection before roadworthiness can be confirmed.</p>
+          </div>
+        </div>
+      ` : ''}
       
       <div class="mot-summary">
         <h3>Latest MOT Test</h3>
@@ -206,6 +230,7 @@ function displayValuationResults(data) {
   const totalCost = financial.total_estimated_cost || askingPrice;
   const repairsMin = financial.estimated_repairs_min || 0;
   const repairsMax = financial.estimated_repairs_max || 0;
+  const motExpired = data.data?.motTests?.[0]?.expiryDate ? isMotExpired(data.data.motTests[0].expiryDate) : false;
   
   let html = `
     <div class="result-card">
@@ -223,6 +248,20 @@ function displayValuationResults(data) {
           ${recommendation.label}
         </span>
       </div>
+      
+      ${motExpired ? `
+        <div class="alert-box alert-danger">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <div>
+            <strong>⚠️ MOT EXPIRED</strong>
+            <p>This vehicle's MOT expired on ${formatDate(data.data.motTests[0].expiryDate)}. Will require an in-person inspection before roadworthiness can be confirmed. Factor this into your valuation.</p>
+          </div>
+        </div>
+      ` : ''}
       
       <div class="valuation-summary">
         <div class="score-circle">
@@ -805,6 +844,49 @@ style.textContent = `
     border-radius: var(--radius-md);
     font-size: var(--font-size-sm);
     color: var(--color-text-subtle);
+  }
+  
+  .alert-box {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+    border: 1px solid;
+  }
+  
+  .alert-box svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  
+  .alert-box div {
+    flex: 1;
+  }
+  
+  .alert-box strong {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-md);
+  }
+  
+  .alert-box p {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+  }
+  
+  .alert-danger {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+  }
+  
+  .alert-warning {
+    background: rgba(255, 193, 7, 0.1);
+    border-color: rgba(255, 193, 7, 0.3);
+    color: #fde047;
   }
   
   .no-issues {
