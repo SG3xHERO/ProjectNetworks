@@ -2,8 +2,8 @@
 // Configuration
 const CONFIG = {
   apiUrl: window.location.hostname === 'localhost' 
-    ? 'http://localhost:8000' 
-    : '/api',
+    ? 'http://localhost:8084' 
+    : 'https://mot-api.projectnetworks.co.uk',
   apiKey: 'your-api-key-here' // This should be set via environment/config
 };
 
