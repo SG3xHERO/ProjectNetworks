@@ -145,7 +145,15 @@ function displayMotResults(data) {
   let html = `
     <div class="result-card">
       <div class="result-header">
-        <h2 class="result-registration">${data.registration}</h2>
+        <div>
+          <h2 class="result-registration">${data.registration}</h2>
+          ${motData.make || motData.model ? `
+            <p class="vehicle-info">
+              ${[motData.make, motData.model].filter(Boolean).join(' ')}
+              ${motData.primaryColour ? `<span class="vehicle-color"> • ${motData.primaryColour}</span>` : ''}
+            </p>
+          ` : ''}
+        </div>
         <span class="result-badge ${getResultBadgeClass(testResult)}">
           ${testResult}
         </span>
@@ -191,10 +199,26 @@ function displayValuationResults(data) {
   const valuation = data.valuation;
   const recommendation = getRecommendationDetails(valuation.recommendation);
   
+  // Safely access financial analysis data
+  const financial = valuation.financial_analysis || {};
+  const askingPrice = financial.asking_price || 0;
+  const estimatedRepairs = financial.estimated_repairs || 0;
+  const totalCost = financial.total_estimated_cost || askingPrice;
+  const repairsMin = financial.estimated_repairs_min || 0;
+  const repairsMax = financial.estimated_repairs_max || 0;
+  
   let html = `
     <div class="result-card">
       <div class="result-header">
-        <h2 class="result-registration">${data.registration}</h2>
+        <div>
+          <h2 class="result-registration">${data.registration}</h2>
+          ${data.data?.make || data.data?.model ? `
+            <p class="vehicle-info">
+              ${[data.data.make, data.data.model].filter(Boolean).join(' ')}
+              ${data.data.primaryColour ? `<span class="vehicle-color"> • ${data.data.primaryColour}</span>` : ''}
+            </p>
+          ` : ''}
+        </div>
         <span class="result-badge ${recommendation.class}">
           ${recommendation.label}
         </span>
@@ -239,22 +263,22 @@ function displayValuationResults(data) {
         <div class="finance-grid">
           <div class="finance-item">
             <span class="finance-label">Asking Price</span>
-            <span class="finance-value">£${valuation.financial_analysis.asking_price.toFixed(2)}</span>
+            <span class="finance-value">£${askingPrice.toLocaleString('en-GB', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
           </div>
           <div class="finance-item">
             <span class="finance-label">Est. Repairs</span>
-            <span class="finance-value">£${valuation.financial_analysis.estimated_repairs.toFixed(2)}</span>
+            <span class="finance-value">£${estimatedRepairs.toLocaleString('en-GB', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
           </div>
           <div class="finance-item">
             <span class="finance-label">Total Cost</span>
-            <span class="finance-value highlight">£${valuation.financial_analysis.total_estimated_cost.toFixed(2)}</span>
+            <span class="finance-value highlight">£${totalCost.toLocaleString('en-GB', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
           </div>
         </div>
-        <p class="finance-note">Repair estimates: £${valuation.financial_analysis.estimated_repairs_min} - £${valuation.financial_analysis.estimated_repairs_max}</p>
+        <p class="finance-note">Repair estimates: £${repairsMin.toLocaleString('en-GB')} - £${repairsMax.toLocaleString('en-GB')}</p>
       </div>
       
-      ${displayFactors('Risk Factors', valuation.risk_factors, 'warning')}
-      ${displayFactors('Positive Factors', valuation.positive_factors, 'success')}
+      ${displayFactors('Risk Factors', valuation.risk_factors || [], 'warning')}
+      ${displayFactors('Positive Factors', valuation.positive_factors || [], 'success')}
       ${displayScoreBreakdown(valuation.scores)}
       
       <div class="disclaimer-box">
@@ -310,16 +334,29 @@ function displayTestHistory(tests) {
       <div class="history-timeline">
   `;
   
-  tests.slice(0, 5).forEach(test => {
+  tests.forEach((test, index) => {
+    const hasIssues = test.rfrAndComments && test.rfrAndComments.length > 0;
+    const testId = `test-${index}`;
+    
     html += `
       <div class="timeline-item">
         <div class="timeline-marker ${test.testResult === 'PASSED' ? 'pass' : 'fail'}"></div>
         <div class="timeline-content">
-          <div class="timeline-header">
-            <span class="timeline-date">${formatDate(test.completedDate)}</span>
-            <span class="timeline-result ${test.testResult === 'PASSED' ? 'pass' : 'fail'}">${test.testResult}</span>
+          <div class="timeline-header" onclick="toggleTestDetails('${testId}')" style="cursor: pointer;">
+            <div>
+              <span class="timeline-date">${formatDate(test.completedDate)}</span>
+              ${test.odometerValue ? `<span class="timeline-mileage"> • ${test.odometerValue.toLocaleString()} miles</span>` : ''}
+            </div>
+            <div>
+              <span class="timeline-result ${test.testResult === 'PASSED' ? 'pass' : 'fail'}">${test.testResult}</span>
+              ${hasIssues ? '<span class="expand-icon">▼</span>' : ''}
+            </div>
           </div>
-          ${test.odometerValue ? `<p class="timeline-mileage">${test.odometerValue.toLocaleString()} miles</p>` : ''}
+          ${hasIssues ? `
+            <div id="${testId}" class="timeline-details" style="display: none;">
+              ${displayRFRItems(test.rfrAndComments)}
+            </div>
+          ` : ''}
         </div>
       </div>
     `;
@@ -331,6 +368,10 @@ function displayTestHistory(tests) {
 
 // Helper: Display Factors
 function displayFactors(title, factors, type) {
+  if (!factors || factors.length === 0) {
+    return '';
+  }
+  
   return `
     <div class="factors-section ${type}">
       <h3>${title}</h3>
@@ -343,19 +384,26 @@ function displayFactors(title, factors, type) {
 
 // Helper: Display Score Breakdown
 function displayScoreBreakdown(scores) {
+  if (!scores || Object.keys(scores).length === 0) {
+    return '';
+  }
+  
   return `
     <div class="score-breakdown">
       <h3>Score Breakdown</h3>
       <div class="scores-grid">
-        ${Object.entries(scores).map(([key, value]) => `
-          <div class="score-item">
-            <span class="score-label">${formatScoreLabel(key)}</span>
-            <div class="score-bar">
-              <div class="score-fill" style="width: ${value}%"></div>
+        ${Object.entries(scores).map(([key, value]) => {
+          const numValue = typeof value === 'number' ? value : 0;
+          return `
+            <div class="score-item">
+              <span class="score-label">${formatScoreLabel(key)}</span>
+              <div class="score-bar">
+                <div class="score-fill" style="width: ${numValue}%"></div>
+              </div>
+              <span class="score-value">${numValue}</span>
             </div>
-            <span class="score-value">${value}</span>
-          </div>
-        `).join('')}
+          `;
+        }).join('')}
       </div>
     </div>
   `;
@@ -418,10 +466,20 @@ function getRecommendationDetails(recommendation) {
 
 function formatDate(dateString) {
   if (!dateString) return 'N/A';
+  
+  // Handle ISO format (YYYY-MM-DD)
+  if (dateString.includes('-')) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+  
+  // Handle dot format (YYYY.MM.DD)
   const parts = dateString.split('.');
   if (parts.length === 3) {
-    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    const date = new Date(parts[0], parts[1] - 1, parts[2]);
+    return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
   }
+  
   return dateString;
 }
 
@@ -464,9 +522,45 @@ function initMobileMenu() {
   }
 }
 
+// Toggle test details
+function toggleTestDetails(testId) {
+  const details = document.getElementById(testId);
+  const icon = details.previousElementSibling.querySelector('.expand-icon');
+  
+  if (details.style.display === 'none') {
+    details.style.display = 'block';
+    if (icon) icon.style.transform = 'rotate(180deg)';
+  } else {
+    details.style.display = 'none';
+    if (icon) icon.style.transform = 'rotate(0deg)';
+  }
+}
+
+// Make toggleTestDetails available globally
+window.toggleTestDetails = toggleTestDetails;
+
 // Additional Styles for Dynamic Content
 const style = document.createElement('style');
 style.textContent = `
+  .result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-6);
+    gap: var(--space-4);
+  }
+  
+  .vehicle-info {
+    font-size: var(--font-size-md);
+    color: var(--color-text-subtle);
+    margin-top: var(--space-2);
+    font-weight: 500;
+  }
+  
+  .vehicle-color {
+    text-transform: capitalize;
+  }
+  
   .info-grid, .finance-grid, .scores-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -563,6 +657,40 @@ style.textContent = `
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--space-2);
+    padding: var(--space-2);
+    border-radius: var(--radius-sm);
+    transition: background 0.2s ease;
+  }
+  
+  .timeline-header:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  
+  .timeline-mileage {
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-sm);
+  }
+  
+  .expand-icon {
+    display: inline-block;
+    margin-left: var(--space-2);
+    transition: transform 0.3s ease;
+    font-size: 0.8em;
+  }
+  
+  .timeline-details {
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .timeline-details .rfr-section {
+    margin-top: 0;
+  }
+  
+  .timeline-details h3 {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--space-3);
   }
   
   .timeline-result.pass {
