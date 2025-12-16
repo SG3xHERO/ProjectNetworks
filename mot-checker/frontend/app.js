@@ -202,16 +202,23 @@ function displayMotResults(data) {
 
 // Display Valuation Results
 function displayValuationResults(data) {
+  console.log('Valuation response data:', data);
+  console.log('Financial analysis:', data.valuation?.financial_analysis);
+  
   const valuation = data.valuation;
   const recommendation = getRecommendationDetails(valuation.recommendation);
   
   // Safely access financial analysis data
   const financial = valuation.financial_analysis || {};
+  console.log('Financial object:', financial);
+  
   const askingPrice = financial.asking_price || 0;
   const estimatedRepairs = financial.estimated_repairs || 0;
   const totalCost = financial.total_estimated_cost || askingPrice;
   const repairsMin = financial.estimated_repairs_min || 0;
   const repairsMax = financial.estimated_repairs_max || 0;
+  
+  console.log('Values:', { askingPrice, estimatedRepairs, totalCost, repairsMin, repairsMax });
   
   let html = `
     <div class="result-card">
