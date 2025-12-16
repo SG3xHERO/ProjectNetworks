@@ -269,18 +269,18 @@ function displayValuationResults(data) {
         <div class="finance-grid">
           <div class="finance-item">
             <span class="finance-label">Asking Price</span>
-            <span class="finance-value">£${askingPrice.toLocaleString('en-GB', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+            <span class="finance-value">£${Number(askingPrice).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
           </div>
           <div class="finance-item">
             <span class="finance-label">Est. Repairs</span>
-            <span class="finance-value">£${estimatedRepairs.toLocaleString('en-GB', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+            <span class="finance-value">£${Number(estimatedRepairs).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
           </div>
           <div class="finance-item">
             <span class="finance-label">Total Cost</span>
-            <span class="finance-value highlight">£${totalCost.toLocaleString('en-GB', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+            <span class="finance-value highlight">£${Number(totalCost).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
           </div>
         </div>
-        <p class="finance-note">Repair estimates: £${repairsMin.toLocaleString('en-GB')} - £${repairsMax.toLocaleString('en-GB')}</p>
+        <p class="finance-note">Repair estimates: £${Number(repairsMin).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} - £${Number(repairsMax).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
       </div>
       
       ${displayFactors('Risk Factors', valuation.risk_factors || [], 'warning')}

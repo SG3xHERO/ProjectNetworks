@@ -309,6 +309,7 @@ async def calculate_valuation(
         return {
             "registration": valuation_request.registration,
             "asking_price": valuation_request.asking_price,
+            "data": mot_data,
             "valuation": valuation_result,
             "processed_at": datetime.utcnow().isoformat(),
             "last_updated": "2025-12-16"
