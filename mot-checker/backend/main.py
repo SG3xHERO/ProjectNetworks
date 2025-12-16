@@ -60,7 +60,7 @@ app.add_middleware(
 # Trusted host middleware
 app.add_middleware(
     TrustedHostMiddleware,
-    allowed_hosts=["mot.projectnetworks.co.uk", "localhost", "127.0.0.1"]
+    allowed_hosts=["mot.projectnetworks.co.uk", "api.projectnetworks.co.uk", "localhost", "127.0.0.1", "192.168.1.3"]
 )
 
 
