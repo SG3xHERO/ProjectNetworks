@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Essential Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- SEO Meta Tags -->
+  <title>MOT Checker | Project Networks Vehicle History</title>
+  <meta name="description" content="Check your vehicle's MOT history, get repair cost estimates, and determine if a used car is worth buying. Powered by DVLA data with intelligent valuation analysis.">
+  <meta name="keywords" content="MOT checker, vehicle history, car valuation, DVLA MOT, repair costs, used car checker">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://mot.projectnetworks.co.uk/">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mot.projectnetworks.co.uk/">
+  <meta property="og:title" content="MOT Checker | Project Networks">
+  <meta property="og:description" content="Check vehicle MOT history and get intelligent valuation analysis">
+  <meta property="og:image" content="https://mot.projectnetworks.co.uk/og-image.jpg">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Background Effects -->
+  <div class="noise-overlay"></div>
+  <div class="gradient-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <!-- Preloader -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <div class="preloader-logo">MOT</div>
+      <div class="preloader-spinner"></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="container nav-container">
+      <a href="https://projectnetworks.co.uk" class="logo">
+        <span class="logo-text">Project Networks</span>
+        <span class="logo-badge">UK</span>
+      </a>
+      <div class="nav-links">
+        <a href="#checker" class="nav-link active">MOT Checker</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="https://projectnetworks.co.uk" class="nav-link">Main Site</a>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="checker" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>Secure DVLA Data</span>
+        </div>
+        <h1 class="hero-title">
+          <span class="gradient-text">MOT History</span> Checker
+        </h1>
+        <p class="hero-subtitle">Smart vehicle valuation powered by official DVLA data</p>
+        <p class="hero-text">
+          Check any UK vehicle's complete MOT history, get detailed repair cost estimates, and find out if it's worth buying. Our intelligent system analyzes years of test data to help you make informed decisions.
+        </p>
+      </div>
+
+      <!-- Main Checker Card -->
+      <div class="checker-card">
+        <div class="checker-tabs">
+          <button class="tab-btn active" data-tab="mot-lookup">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            MOT History
+          </button>
+          <button class="tab-btn" data-tab="valuation">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            Valuation
+          </button>
+        </div>
+
+        <div class="tab-content active" id="mot-lookup">
+          <form id="mot-form" class="checker-form">
+            <div class="form-group">
+              <label for="registration">Vehicle Registration</label>
+              <div class="input-with-icon">
+                <input 
+                  type="text" 
+                  id="registration" 
+                  name="registration" 
+                  placeholder="e.g. AB12 CDE"
+                  required
+                  maxlength="8"
+                  autocomplete="off"
+                  class="form-input"
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 18h-1a4 4 0 0 0-8 0H5"></path>
+                  <path d="M5 18H3a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h1l2-5h12l2 5h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                </svg>
+              </div>
+              <small class="form-hint">Enter a UK vehicle registration number</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-large btn-glow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+              Check MOT History
+            </button>
+          </form>
+        </div>
+
+        <div class="tab-content" id="valuation">
+          <form id="valuation-form" class="checker-form">
+            <div class="form-group">
+              <label for="valuation-registration">Vehicle Registration</label>
+              <div class="input-with-icon">
+                <input 
+                  type="text" 
+                  id="valuation-registration" 
+                  name="registration" 
+                  placeholder="e.g. AB12 CDE"
+                  required
+                  maxlength="8"
+                  autocomplete="off"
+                  class="form-input"
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 18h-1a4 4 0 0 0-8 0H5"></path>
+                  <path d="M5 18H3a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h1l2-5h12l2 5h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="asking-price">Asking Price (£)</label>
+              <div class="input-with-icon">
+                <input 
+                  type="number" 
+                  id="asking-price" 
+                  name="asking_price" 
+                  placeholder="5000"
+                  required
+                  min="0"
+                  step="1"
+                  class="form-input"
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <small class="form-hint">How much is the seller asking?</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-large btn-glow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"></path>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+              </svg>
+              Get Valuation
+            </button>
+          </form>
+        </div>
+
+        <div class="data-notice">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <span>Data sourced from official DVLA records • Last updated: 16/12/2025</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Results Section -->
+  <section id="results" class="results-section" style="display: none;">
+    <div class="container">
+      <div id="results-content"></div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="how-it-works-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Simple, fast, and accurate vehicle history checks</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 18h-1a4 4 0 0 0-8 0H5"></path>
+              <path d="M5 18H3a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h1l2-5h12l2 5h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            </svg>
+          </div>
+          <h3>Enter Registration</h3>
+          <p>Simply enter the vehicle's registration number. All UK vehicles are supported.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3>Official DVLA Data</h3>
+          <p>We securely retrieve the complete MOT history from official DVLA records.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20"></path>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h3>Cost Analysis</h3>
+          <p>Our algorithm estimates repair costs based on market data and failure history.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+          </div>
+          <h3>Smart Recommendation</h3>
+          <p>Get a comprehensive valuation and recommendation on whether it's worth buying.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <h2>About MOT Checker</h2>
+        <p>
+          Part of the Project Networks suite of tools, our MOT Checker helps you make informed decisions when buying used vehicles. We analyze official DVLA MOT data to provide repair cost estimates and intelligent valuations.
+        </p>
+        <p>
+          <strong>⚠️ Important Disclaimer:</strong> Repair cost estimates are based on UK market averages and may vary significantly by location, garage, vehicle type, and parts availability. Always get a professional inspection before purchasing. Last data update: 16/12/2025.
+        </p>
+        <div class="about-actions">
+          <a href="https://projectnetworks.co.uk" class="btn btn-outline">
+            Visit Main Site
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <span class="logo-text">Project Networks</span>
+          <span class="logo-badge">UK</span>
+        </div>
+        <p class="footer-text">
+          MOT Checker - Part of the Project Networks tools suite
+        </p>
+        <div class="footer-links">
+          <a href="https://projectnetworks.co.uk">Main Site</a>
+          <span>•</span>
+          <a href="https://benfoggon.com" target="_blank">Contact</a>
+          <span>•</span>
+          <a href="https://discord.gg/3nyGVhD23c" target="_blank">Discord</a>
+        </div>
+        <p class="footer-copyright">
+          © 2024 Project Networks. Built by <a href="https://benfoggon.com" target="_blank">Ben Foggon</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
