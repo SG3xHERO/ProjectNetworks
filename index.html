@@ -1,26 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YYKK0NHJ4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-3YYKK0NHJ4');
+  </script>
+
   <!-- Essential Meta Tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
   <!-- SEO Meta Tags -->
-  <title>Project Networks | UK Gaming Server Network for everyone</title>
-  <meta name="description" content="Project Networks is a UK-based server network offering a place for everyone to play games together. Currently running Minecraft Season 9 with custom modpack, Terraria, and more. Join our friendly gaming community.">
-  <meta name="keywords" content="Project Networks, UK Minecraft server, Project Survival S9, UK gaming servers, Terraria server, gaming community, play with friends, Ben Foggon">
+  <title>Project Networks | UK Projects, Tools & Game Servers</title>
+  <meta name="description" content="Project Networks - A UK-based platform showcasing web projects, free tools, and game servers. Home to Project MOT Checker, Minecraft Season 9 server, and more community-driven projects by Ben Foggon.">
+  <meta name="keywords" content="Project Networks, Ben Foggon projects, UK web projects, MOT checker, UK Minecraft server, Project Survival S9, free tools, web applications, gaming servers">
   <meta name="author" content="Ben Foggon">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  
+  <!-- Additional SEO Meta Tags -->
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  <meta name="rating" content="general">
+  <meta name="distribution" content="global">
+  <meta name="theme-color" content="#6366f1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Project Networks">
+  <meta name="format-detection" content="telephone=no">
+  
+  <!-- Geographic Tags -->
+  <meta name="geo.region" content="GB-SOM">
+  <meta name="geo.placename" content="Yeovil">
+  <meta name="geo.position" content="50.9451;-2.6325">
+  <meta name="ICBM" content="50.9451, -2.6325">
   
   <!-- Canonical URL -->
   <link rel="canonical" href="https://projectnetworks.co.uk/">
   
+  <!-- Alternate Languages (if needed in future) -->
+  <link rel="alternate" hreflang="en-gb" href="https://projectnetworks.co.uk/">
+  <link rel="alternate" hreflang="x-default" href="https://projectnetworks.co.uk/">
+  
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://projectnetworks.co.uk/">
-  <meta property="og:title" content="Project Networks | A Place for everyone to Play Games">
-  <meta property="og:description" content="Join Project Networks, a UK server network for everyone to play games together. Currently running Minecraft S9, Terraria, and more!">
+  <meta property="og:title" content="Project Networks | UK Projects, Tools & Game Servers">
+  <meta property="og:description" content="Showcasing web projects, free tools like MOT Checker, and game servers including Minecraft S9. A UK-based platform for community-driven projects.">
   <meta property="og:image" content="https://projectnetworks.co.uk/assets/images/og-image.jpg">
   <meta property="og:site_name" content="Project Networks">
   <meta property="og:locale" content="en_GB">
@@ -28,14 +59,17 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://projectnetworks.co.uk/">
-  <meta name="twitter:title" content="Project Networks | A Place for everyone to Play Games">
-  <meta name="twitter:description" content="Join our UK server network for Minecraft S9, Terraria, and more. A friendly community for everyone to game together!">
+  <meta property="og:title" content="Project Networks | UK Projects, Tools & Game Servers">
+  <meta name="twitter:description" content="Showcasing web projects, free tools like MOT Checker, and game servers including Minecraft S9. UK-based community-driven platform.">
   <meta name="twitter:image" content="https://projectnetworks.co.uk/assets/images/og-image.jpg">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icon.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icon.png">
   <link rel="apple-touch-icon" href="assets/images/icon.png">
+  
+  <!-- Sitemap -->
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   
   <!-- Fonts with preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,21 +86,37 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Project Networks",
+    "alternateName": "Project Networks UK",
     "url": "https://projectnetworks.co.uk",
     "logo": "https://projectnetworks.co.uk/assets/images/icon.png",
-    "description": "UK-based server network offering a place for everyone to play games like Minecraft, Terraria, and more together",
+    "description": "UK-based platform showcasing web projects, free tools, and game servers. Home to Project MOT Checker, Minecraft servers, and other community-driven applications.",
+    "foundingDate": "2020",
+    "founder": {
+      "@type": "Person",
+      "name": "Ben Foggon",
+      "url": "https://benfoggon.com"
+    },
     "address": {
       "@type": "PostalAddress",
+      "addressLocality": "Yeovil",
+      "addressRegion": "Somerset",
       "addressCountry": "GB"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "United Kingdom"
     },
     "sameAs": [
       "https://discord.gg/3nyGVhD23c",
-      "https://benfoggon.com"
+      "https://benfoggon.com",
+      "https://photos.benfoggon.com",
+      "https://mot.projectnetworks.co.uk"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "Customer Service",
-      "email": "contact@projectnetworks.co.uk"
+      "email": "contact@projectnetworks.co.uk",
+      "availableLanguage": "English"
     }
   }
   </script>
@@ -76,12 +126,96 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Project Networks",
+    "alternateName": "Project Networks UK Projects & Tools",
     "url": "https://projectnetworks.co.uk",
+    "description": "UK-based platform showcasing web projects, free tools like MOT Checker, and game servers. A hub for community-driven applications and services.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Project Networks",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://projectnetworks.co.uk/assets/images/icon.png"
+      }
+    },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://projectnetworks.co.uk/search?q={search_term_string}",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://projectnetworks.co.uk/search?q={search_term_string}"
+      },
       "query-input": "required name=search_term_string"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Gaming Servers",
+    "description": "Available gaming servers on Project Networks",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Game",
+          "name": "Project Survival Season 9",
+          "description": "Minecraft survival server with custom modpack",
+          "gamePlatform": "PC",
+          "url": "https://projectnetworks.co.uk/#servers"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Game",
+          "name": "Terraria Server",
+          "description": "Terraria multiplayer server coming soon",
+          "gamePlatform": "PC",
+          "url": "https://projectnetworks.co.uk/#servers"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://projectnetworks.co.uk/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Game Servers",
+        "item": "https://projectnetworks.co.uk/#servers"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Projects",
+        "item": "https://projectnetworks.co.uk/#projects"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "About",
+        "item": "https://projectnetworks.co.uk/#about"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Downloads",
+        "item": "https://projectnetworks.co.uk/download.html"
+      }
+    ]
   }
   </script>
 </head>
@@ -112,7 +246,8 @@
       </a>
       <div class="nav-links">
         <a href="#home" class="nav-link active">Home</a>
-        <a href="#servers" class="nav-link">Servers</a>
+        <a href="#servers" class="nav-link">Game Servers</a>
+        <a href="#projects" class="nav-link">Projects</a>
         <a href="#about" class="nav-link">About</a>
         <a href="download.html" class="nav-link">Downloads</a>
         <a href="https://benfoggon.com" class="nav-link nav-link-cta">Contact</a>
@@ -139,23 +274,24 @@
         <h1 class="hero-title">
           Welcome to <span class="gradient-text">Project Networks</span>
         </h1>
-        <p class="hero-subtitle">A Place for everyone to Play Games</p>
+        <p class="hero-subtitle">Showcasing Projects, Tools & Game Servers</p>
         <p class="hero-text">
-          A UK-based server network offering a friendly community where everyone can play games together. Currently hosting Minecraft, Terraria, and more. Join our laid-back community and enjoy gaming with friends.
+          A UK-based platform where I build and host projects, free tools, and game servers for the community. From the MOT Checker to Minecraft, explore everything we have to offer. Built with passion, shared with everyone.
         </p>
         <div class="hero-actions">
-          <a href="#servers" class="btn btn-primary btn-large">
+          <a href="#projects" class="btn btn-primary btn-large">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            Explore Projects
+          </a>
+          <a href="#servers" class="btn btn-outline btn-large">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
               <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
             </svg>
-            Explore Servers
-          </a>
-          <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-large">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-            </svg>
-            Join Discord
+            Game Servers
           </a>
         </div>
       </div>
@@ -169,8 +305,8 @@
   <section id="servers" class="projects-section">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">Our Network</span>
-        <h2 class="section-title">Current Servers</h2>
+        <span class="section-label">Gaming</span>
+        <h2 class="section-title">Game Servers</h2>
         <p class="section-description">Join our community and play games with everyone on our UK-hosted servers</p>
       </div>
 
@@ -248,6 +384,81 @@
     </div>
   </section>
 
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Applications</span>
+        <h2 class="section-title">Our Projects</h2>
+        <p class="section-description">Free-to-use tools and applications built for the community</p>
+      </div>
+
+      <div class="project-grid">
+        <!-- Project MOT Card -->
+        <article class="project-card" data-aos="fade-up">
+          <div class="project-image">
+            <img src="assets/images/mot.jpg" alt="Project MOT Checker" loading="lazy">
+            <div class="project-badge">
+              <span class="badge-dot"></span>
+              Live
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Project MOT</h3>
+            <p class="project-description">
+              A free-to-use, open source MOT checker that allows users to quickly and easily check the MOT status of any UK vehicle. Built with transparency and accessibility in mind, providing essential vehicle information to help keep UK roads safe.
+            </p>
+            <div class="project-features">
+              <span class="feature-tag">Open Source</span>
+              <span class="feature-tag">Free Tool</span>
+              <span class="feature-tag">UK MOT Data</span>
+            </div>
+            <div class="project-footer">
+              <a href="https://mot.projectnetworks.co.uk" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                Check MOT Status
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- More Projects Coming Card -->
+        <article class="project-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="project-image">
+            <img src="assets/images/network.png" alt="More Projects - Coming Soon" loading="lazy">
+            <div class="project-badge badge-new">
+              <span class="badge-dot"></span>
+              Coming Soon
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">More Tools Coming</h3>
+            <p class="project-description">
+              We're building more free tools and applications for the community. Have an idea for something useful? Let us know in Discord and we might build it!
+            </p>
+            <div class="project-features">
+              <span class="feature-tag">Community Driven</span>
+              <span class="feature-tag">Free Tools</span>
+              <span class="feature-tag">Open Source</span>
+            </div>
+            <div class="project-footer">
+              <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+                Share Your Ideas
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Sister Sites Section -->
   <section id="sister-sites" class="sister-sites-section">
     <div class="container">
@@ -311,16 +522,28 @@
       <div class="about-grid">
         <div class="about-content" data-aos="fade-right">
           <span class="section-label">About Us</span>
-          <h2 class="section-title">Why Join Project Networks?</h2>
+          <h2 class="section-title">What is Project Networks?</h2>
           <div class="about-text">
             <p>
-              Project Networks is a UK-based server network offering a place for everyone to play games together. We run seasonal servers - when a season is active, jump in and play! When a season closes, we take a break until the next one kicks off.
+              Project Networks is my UK-based platform where I build, host, and share projects with the community. From free tools like the MOT Checker to game servers like Minecraft Season, everything here is designed to be useful, fun, and accessible to everyone.
             </p>
             <p>
-              Currently running Minecraft Season 9 and looking to expand with Terraria and other games. It's all about having fun and playing together during active seasons. No stress, just good times with a great community.
+              It's a space to showcase what I'm working on, whether that's web applications, helpful tools, or gaming servers. Each project is built with care and shared openly. If you have ideas or want to collaborate, feel free to reach out!
             </p>
           </div>
           <div class="about-features">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <div class="feature-text">
+                <h4>Open Projects</h4>
+                <p>Free tools and applications for everyone</p>
+              </div>
+            </div>
             <div class="feature-item">
               <div class="feature-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -328,8 +551,8 @@
                 </svg>
               </div>
               <div class="feature-text">
-                <h4>High Performance</h4>
-                <p>UK-based servers for minimal latency</p>
+                <h4>UK Hosted</h4>
+                <p>Fast, reliable hosting based in the UK</p>
               </div>
             </div>
             <div class="feature-item">
@@ -342,26 +565,14 @@
                 </svg>
               </div>
               <div class="feature-text">
-                <h4>Friendly Community</h4>
-                <p>Welcoming group of everyone who love gaming</p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M12 6v6l4 2"></path>
-                </svg>
-              </div>
-              <div class="feature-text">
-                <h4>Seasonal Play</h4>
-                <p>Fresh seasons with new adventures</p>
+                <h4>Community Driven</h4>
+                <p>Built for everyone, shaped by feedback</p>
               </div>
             </div>
           </div>
           <div class="about-cta">
             <a href="https://benfoggon.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
-              Get in Touch
+              Learn More About Me
             </a>
           </div>
         </div>
@@ -370,12 +581,12 @@
             <div class="visual-stat">
               <div class="visual-stat-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
                 </svg>
               </div>
-              <div class="visual-stat-number">Season 9</div>
-              <div class="visual-stat-label">Currently Active</div>
+              <div class="visual-stat-number">Multiple</div>
+              <div class="visual-stat-label">Live Projects</div>
             </div>
           </div>
           <div class="visual-card">
@@ -399,8 +610,8 @@
   <section class="cta-section">
     <div class="container">
       <div class="cta-content" data-aos="zoom-in">
-        <h2 class="cta-title">Ready to Join?</h2>
-        <p class="cta-text">Connect with our community on Discord and stay updated with the latest news, events, and server information.</p>
+        <h2 class="cta-title">Want to Get Involved?</h2>
+        <p class="cta-text">Join our Discord community to stay updated with new projects, share ideas, or just hang out with like-minded people.</p>
         <div class="cta-actions">
           <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large btn-glow">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -425,7 +636,7 @@
             <span class="logo-text">Project Networks</span>
             <span class="logo-badge">UK</span>
           </div>
-          <p class="footer-description">A UK-based server network offering a place for everyone to play games like Minecraft, Terraria, and more together.</p>
+          <p class="footer-description">A UK-based platform showcasing web projects, free tools, and game servers. Built by Ben Foggon for the community.</p>
           <div class="footer-social">
             <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" aria-label="Discord" class="social-link">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -438,15 +649,17 @@
           <h3 class="footer-heading">Quick Links</h3>
           <ul class="footer-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#servers">Servers</a></li>
+            <li><a href="#servers">Game Servers</a></li>
+            <li><a href="#projects">Projects</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="https://benfoggon.com" target="_blank" rel="noopener noreferrer">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h3 class="footer-heading">Our Servers</h3>
+          <h3 class="footer-heading">Our Services</h3>
           <ul class="footer-links">
             <li><a href="https://map.projectnetworks.co.uk" target="_blank" rel="noopener noreferrer">Project Survival S9</a></li>
+            <li><a href="https://mot.projectnetworks.co.uk" target="_blank" rel="noopener noreferrer">MOT Checker</a></li>
             <li><a href="download.html">Downloads</a></li>
             <li><a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer">Join Discord</a></li>
           </ul>
