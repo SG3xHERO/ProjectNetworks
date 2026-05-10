@@ -1,0 +1,412 @@
+/* =====================================================
+   Download Page — Specific Styles
+   ===================================================== */
+
+/* Hero */
+.dl-hero {
+  padding: calc(var(--nav-h) + var(--space-10)) 0 var(--space-10);
+  position: relative;
+  z-index: 2;
+}
+
+.dl-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.8375rem;
+  color: var(--t-subtle);
+  margin-bottom: var(--space-6);
+}
+
+.dl-breadcrumb a { color: var(--t-muted); transition: color var(--t-fast); }
+.dl-breadcrumb a:hover { color: var(--c-purple-light); }
+.dl-breadcrumb svg { opacity: 0.4; }
+
+.dl-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 5px 14px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--r-full);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--c-green);
+  margin-bottom: var(--space-5);
+}
+
+.dl-hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: var(--space-4);
+}
+
+.dl-hero-desc {
+  font-size: 1.0625rem;
+  color: var(--t-muted);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+/* =====================================================
+   Primary Download Card
+   ===================================================== */
+.dl-primary-section {
+  padding-bottom: var(--space-8);
+  position: relative;
+  z-index: 2;
+}
+
+.dl-primary-card {
+  background: linear-gradient(145deg, rgba(168, 85, 247, 0.06), rgba(59, 130, 246, 0.04));
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: var(--r-2xl);
+  padding: var(--space-7) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(168, 85, 247, 0.1);
+}
+
+.dl-primary-card.visible { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(168, 85, 247, 0.15); }
+
+.dl-app-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.dl-app-icon {
+  width: 68px;
+  height: 68px;
+  background: var(--g-primary);
+  border-radius: var(--r-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.4);
+}
+
+.dl-app-name {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.dl-app-meta {
+  font-size: 0.8375rem;
+  color: var(--t-subtle);
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+
+.dl-app-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 4px 12px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--r-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--c-green);
+  margin-left: auto;
+}
+
+.dl-divider {
+  height: 1px;
+  background: var(--c-border);
+}
+
+.dl-feature-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.dl-feat {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--t-muted);
+}
+
+.dl-feat svg { color: var(--c-purple-light); flex-shrink: 0; }
+
+.dl-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.dl-main-btn { min-width: 240px; justify-content: center; }
+
+.dl-platform-note {
+  font-size: 0.8125rem;
+  color: var(--t-subtle);
+  font-family: var(--font-mono);
+}
+
+/* =====================================================
+   Alternative Platforms
+   ===================================================== */
+.dl-alt-platforms {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.dl-alt-platforms.visible { /* enhanced shadow when JS runs */ }
+
+.dl-alt-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--g-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  flex: 1;
+  min-width: 200px;
+  opacity: 0.7;
+}
+
+.dl-alt-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--c-surface-3);
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--t-subtle);
+  flex-shrink: 0;
+}
+
+.dl-alt-name { font-weight: 700; font-size: 0.9375rem; }
+.dl-alt-status { font-size: 0.8rem; color: var(--t-subtle); margin-top: 2px; }
+.dl-alt-card .tag { margin-left: auto; }
+
+/* =====================================================
+   Steps
+   ===================================================== */
+.dl-steps-section { padding: var(--space-16) 0; }
+
+.dl-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dl-step-card {
+  flex: 1;
+  min-width: 180px;
+  max-width: 240px;
+  padding: var(--space-7) var(--space-5);
+  background: var(--g-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  transition: border-color var(--t-base), box-shadow var(--t-base), transform var(--t-base);
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.dl-step-card.visible { opacity: 1; transform: translateY(0); }
+.dl-step-card:hover { border-color: rgba(168, 85, 247, 0.3); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); transform: translateY(-4px); }
+
+.dl-step-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--c-purple);
+  letter-spacing: 0.1em;
+}
+
+.dl-step-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: var(--r-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-purple-light);
+  transition: background var(--t-base), border-color var(--t-base);
+}
+
+.dl-step-card:hover .dl-step-icon { background: rgba(168, 85, 247, 0.2); border-color: rgba(168, 85, 247, 0.4); }
+
+.dl-step-title { font-weight: 700; font-size: 0.9375rem; }
+.dl-step-desc { font-size: 0.8125rem; color: var(--t-muted); line-height: 1.55; }
+
+.dl-step-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-2);
+  color: var(--t-subtle);
+  opacity: 0.35;
+  flex-shrink: 0;
+  margin-top: 28px;
+}
+
+/* =====================================================
+   Requirements
+   ===================================================== */
+.dl-reqs-section {
+  padding: var(--space-12) 0 var(--space-16);
+  background: linear-gradient(180deg, transparent, rgba(168, 85, 247, 0.02) 50%, transparent);
+}
+
+.dl-reqs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.dl-req-card { height: 100%; }
+
+.dl-req-recommended {
+  border-color: rgba(168, 85, 247, 0.25) !important;
+  background: linear-gradient(145deg, rgba(168, 85, 247, 0.06), rgba(168, 85, 247, 0.02)) !important;
+}
+
+.dl-req-info {
+  border-color: rgba(6, 182, 212, 0.2) !important;
+}
+
+.dl-req-heading {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: var(--space-5);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.dl-req-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.dl-req-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: 0.875rem;
+  color: var(--t-muted);
+  line-height: 1.5;
+}
+
+.dl-req-list li svg { flex-shrink: 0; margin-top: 2px; color: var(--c-green); }
+.dl-req-list li strong { color: var(--t-primary); }
+
+.dl-req-info-list li svg { color: var(--c-cyan); }
+
+/* =====================================================
+   Legacy / Alternative
+   ===================================================== */
+.dl-legacy-section { padding: 0 0 var(--space-16); }
+
+.dl-legacy-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+  padding: var(--space-7) var(--space-8);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-xl);
+  backdrop-filter: blur(10px);
+}
+
+.dl-legacy-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--t-subtle);
+}
+
+.dl-legacy-title {
+  font-family: var(--font-head);
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+}
+
+.dl-legacy-desc {
+  font-size: 0.9375rem;
+  color: var(--t-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+  max-width: 680px;
+}
+
+.dl-legacy-desc a { color: var(--c-purple-light); text-decoration: underline; text-underline-offset: 3px; }
+.dl-legacy-desc code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 2px 6px;
+  background: var(--c-surface-3);
+  border-radius: var(--r-sm);
+  color: var(--c-cyan);
+}
+
+.dl-legacy-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* =====================================================
+   Responsive
+   ===================================================== */
+@media (max-width: 1000px) {
+  .dl-reqs-grid { grid-template-columns: 1fr 1fr; }
+  .dl-req-info { grid-column: 1 / -1; }
+}
+
+@media (max-width: 768px) {
+  .dl-primary-card { padding: var(--space-5); }
+  .dl-app-status { margin-left: 0; }
+  .dl-main-btn { min-width: auto; width: 100%; }
+  .dl-legacy-card { flex-direction: column; padding: var(--space-5); }
+  .dl-steps { gap: var(--space-4); }
+  .dl-step-arrow { display: none; }
+  .dl-step-card { min-width: 150px; max-width: 180px; }
+  .dl-reqs-grid { grid-template-columns: 1fr; }
+  .dl-req-info { grid-column: auto; }
+}
+
+@media (max-width: 480px) {
+  .dl-app-info { flex-direction: column; align-items: flex-start; }
+  .dl-feature-strip { gap: var(--space-4); }
+}

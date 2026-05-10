@@ -76,10 +76,9 @@
   <!-- Fonts with preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles/styles.css">
   
   <!-- Structured Data / Schema.org -->
@@ -223,7 +222,9 @@
 </head>
 
 <body>
-  <!-- Animated Background Effects -->
+
+  <!-- Particle canvas background -->
+  <canvas id="particle-canvas"></canvas>
   <div class="noise-overlay"></div>
   <div class="gradient-bg">
     <div class="gradient-orb orb-1"></div>
@@ -232,396 +233,631 @@
   </div>
 
   <!-- Preloader -->
-  <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-      <div class="preloader-logo">PN</div>
-      <div class="preloader-spinner"></div>
+  <div id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">
+        <span class="pl-p">P</span><span class="pl-n">N</span>
+      </div>
+      <div class="preloader-track"><div class="preloader-fill"></div></div>
+      <p class="preloader-label">Loading Project Networks</p>
     </div>
   </div>
 
   <!-- Navigation -->
-  <nav class="main-nav" role="navigation" aria-label="Main navigation">
-    <div class="container nav-container">
+  <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
       <a href="index.html" class="logo" aria-label="Project Networks Home">
-        <span class="logo-text">Project Networks</span>
+        <span class="logo-icon">PN</span>
+        <span class="logo-name">Project Networks</span>
         <span class="logo-badge">UK</span>
       </a>
-      <div class="nav-links">
+      <div class="nav-links" id="nav-links">
         <a href="#home" class="nav-link active">Home</a>
-        <a href="#servers" class="nav-link">Game Servers</a>
+        <a href="#launcher" class="nav-link">Launcher</a>
+        <a href="#servers" class="nav-link">Servers</a>
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#about" class="nav-link">About</a>
-        <a href="download.html" class="nav-link">Downloads</a>
-        <a href="https://benfoggon.com" class="nav-link nav-link-cta">Contact</a>
+        <a href="download.html" class="nav-link nav-cta">Downloads</a>
       </div>
-      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- ============================
+       HERO SECTION
+       ============================ -->
   <header id="home" class="hero" role="banner">
     <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
+      <div class="hero-inner">
+        <div class="hero-badge" id="hero-badge">
+          <span class="badge-pulse"></span>
           <span>Online Now</span>
         </div>
-        <h1 class="hero-title">
-          Welcome to <span class="gradient-text">Project Networks</span>
+        <h1 class="hero-title" id="hero-title">
+          <span class="hero-line-1">Welcome to</span>
+          <span class="hero-line-2"><span class="split-text">Project Networks</span></span>
         </h1>
-        <p class="hero-subtitle">Showcasing Projects, Tools & Game Servers</p>
-        <p class="hero-text">
-          A UK-based platform where I build and host projects, free tools, and game servers for the community. From the MOT Checker to Minecraft, explore everything we have to offer. Built with passion, shared with everyone.
+        <p class="hero-sub" id="hero-sub">UK Projects &nbsp;·&nbsp; Tools &nbsp;·&nbsp; Game Servers</p>
+        <p class="hero-desc" id="hero-desc">
+          A UK-based platform where I build and host projects, free tools, and game servers for
+          the community. From the MOT Checker to Minecraft, explore everything built with passion.
         </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary btn-large">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="16 18 22 12 16 6"></polyline>
-              <polyline points="8 6 2 12 8 18"></polyline>
-            </svg>
+        <div class="hero-actions" id="hero-actions">
+          <a href="#launcher" class="btn btn-primary btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Project Launcher
+          </a>
+          <a href="#projects" class="btn btn-ghost btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
             Explore Projects
           </a>
-          <a href="#servers" class="btn btn-outline btn-large">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-            </svg>
-            Game Servers
-          </a>
+        </div>
+        <div class="hero-stats" id="hero-stats">
+          <div class="hstat">
+            <span class="hstat-num">9</span>
+            <span class="hstat-label">Seasons</span>
+          </div>
+          <div class="hstat-div"></div>
+          <div class="hstat">
+            <span class="hstat-num">3+</span>
+            <span class="hstat-label">Live Projects</span>
+          </div>
+          <div class="hstat-div"></div>
+          <div class="hstat">
+            <span class="hstat-num">UK</span>
+            <span class="hstat-label">Hosted</span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="hero-scroll-indicator">
-      <div class="scroll-arrow"></div>
-    </div>
+    <a href="#launcher" class="scroll-hint" aria-label="Scroll down">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
   </header>
 
-  <!-- Servers Section -->
-  <section id="servers" class="projects-section">
+  <!-- ============================
+       PROJECT LAUNCHER SECTION
+       ============================ -->
+  <section id="launcher" class="launcher-section reveal-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label label-new" style="color:var(--c-green);background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.25)">Now Available</span>
+        <h2 class="section-title">Built for Every Season</h2>
+        <p class="section-desc">Project Launcher — the official way to play. One click to install, update, and jump in.</p>
+      </div>
+
+      <div class="launcher-grid">
+        <!-- Left: Copy + features -->
+        <div class="launcher-copy">
+          <p class="launcher-intro">
+            No more hunting for modpack files, configuring Prism Launcher, or chasing Discord messages for server IPs.
+            <strong>Project Launcher is live.</strong> Sign in with your Microsoft account, pick the season pack, and hit play.
+            Mods install automatically, the launcher keeps itself updated, and you can see who's online before you even launch.
+          </p>
+
+          <ul class="launcher-features" id="launcher-features">
+            <li class="lf-item">
+              <span class="lf-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+              <div>
+                <strong>Microsoft OAuth Login</strong>
+                <span>Play on your real account — secure, fast, no faff</span>
+              </div>
+            </li>
+            <li class="lf-item">
+              <span class="lf-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+              </span>
+              <div>
+                <strong>One-Click Install &amp; Update</strong>
+                <span>New season packs pushed by admins, received instantly</span>
+              </div>
+            </li>
+            <li class="lf-item">
+              <span class="lf-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              </span>
+              <div>
+                <strong>Server-Driven Manifest</strong>
+                <span>Admins manage packs remotely — no Discord file hunting</span>
+              </div>
+            </li>
+            <li class="lf-item">
+              <span class="lf-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              </span>
+              <div>
+                <strong>Auto-Updates Everything</strong>
+                <span>Launcher updates itself — always on the latest version</span>
+              </div>
+            </li>
+            <li class="lf-item">
+              <span class="lf-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </span>
+              <div>
+                <strong>Smart RAM Management</strong>
+                <span>Per-pack RAM settings, recommended amounts per modpack</span>
+              </div>
+            </li>
+            <li class="lf-item">
+              <span class="lf-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+              </span>
+              <div>
+                <strong>Live Server Status</strong>
+                <span>See who's online before you even launch</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="tech-badges">
+            <span class="tech-badge">Electron</span>
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">Tailwind CSS</span>
+            <span class="tech-badge">Node.js</span>
+            <span class="tech-badge">Microsoft OAuth</span>
+          </div>
+
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem">
+            <a href="download.html" class="btn btn-primary btn-lg btn-glow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Launcher
+            </a>
+            <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+              Join Discord
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: App Mockup -->
+        <div class="launcher-visual">
+          <div class="launcher-mockup" id="launcher-mockup">
+            <!-- Titlebar -->
+            <div class="mockup-titlebar">
+              <div class="mockup-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <span class="mockup-title">Project Launcher</span>
+              <div class="mockup-controls">
+                <span class="mc mc-min"></span>
+                <span class="mc mc-max"></span>
+                <span class="mc mc-close"></span>
+              </div>
+            </div>
+            <!-- App body -->
+            <div class="mockup-body">
+              <!-- Sidebar -->
+              <div class="mockup-sidebar">
+                <div class="ms-item ms-active">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  Home
+                </div>
+                <div class="ms-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                  Library
+                </div>
+                <div class="ms-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                  Settings
+                </div>
+                <div class="ms-account">
+                  <div class="ms-avatar">BF</div>
+                  <span>BenFoggon</span>
+                </div>
+              </div>
+              <!-- Main content -->
+              <div class="mockup-main">
+                <div class="mockup-section-label">Featured Pack</div>
+                <div class="mockup-pack-card">
+                  <div class="mpc-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                  </div>
+                  <div class="mpc-info">
+                    <div class="mpc-name">Project Survival S9</div>
+                    <div class="mpc-meta">v1.2.3 &nbsp;·&nbsp; Custom Modpack &nbsp;·&nbsp; UK Server</div>
+                    <div class="mpc-status">
+                      <span class="mpc-dot"></span>
+                      <span class="mpc-players">3 / 20 online</span>
+                    </div>
+                  </div>
+                  <button class="mpc-play">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    Play
+                  </button>
+                </div>
+                <div class="mockup-progress-area">
+                  <div class="mockup-progress-label">All mods installed <span class="mpl-pct" style="color:var(--c-green)">✓ Ready</span></div>
+                  <div class="mockup-progress-track">
+                    <div class="mockup-progress-fill" id="mockup-progress-fill"></div>
+                  </div>
+                </div>
+                <div class="mockup-update-badge" style="color:var(--c-green);background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.2)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  Launcher is up to date — v1.0.0
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating glow tags -->
+          <div class="mockup-float-tag tag-1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Secure OAuth
+          </div>
+          <div class="mockup-float-tag tag-2">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            Auto-Updates
+          </div>
+          <div class="mockup-float-tag tag-3">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Live Status
+          </div>
+        </div>
+      </div>
+
+      <!-- How It Works -->
+      <div class="how-it-works" id="how-it-works">
+        <h3 class="hiw-title">How It Works</h3>
+        <div class="hiw-steps">
+          <div class="hiw-step">
+            <div class="hiw-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+            <div class="hiw-num">01</div>
+            <div class="hiw-label">Download Launcher</div>
+            <p class="hiw-desc">Free installer for Windows. Linux coming soon</p>
+          </div>
+          <div class="hiw-arrow">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="hiw-num">02</div>
+            <div class="hiw-label">Sign In with Microsoft</div>
+            <p class="hiw-desc">Your real Minecraft account, securely</p>
+          </div>
+          <div class="hiw-arrow">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <div class="hiw-num">03</div>
+            <div class="hiw-label">Pick a Season Pack</div>
+            <p class="hiw-desc">Browse server-managed modpacks</p>
+          </div>
+          <div class="hiw-arrow">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="hiw-num">04</div>
+            <div class="hiw-label">Hit Play</div>
+            <p class="hiw-desc">Everything installs automatically</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       GAME SERVERS SECTION
+       ============================ -->
+  <section id="servers" class="cards-section reveal-section">
     <div class="container">
       <div class="section-header">
         <span class="section-label">Gaming</span>
         <h2 class="section-title">Game Servers</h2>
-        <p class="section-description">Join our community and play games with everyone on our UK-hosted servers</p>
+        <p class="section-desc">Join our community on our UK-hosted servers</p>
       </div>
 
-      <div class="project-grid">
-        <!-- Project Survival Card -->
-        <article class="project-card" data-aos="fade-up">
-          <div class="project-image">
+      <div class="card-grid">
+        <!-- Project Survival -->
+        <article class="pcard">
+          <div class="pcard-image">
             <img src="assets/images/cta-bg.jpg" alt="Project Survival S9 - Minecraft Server" loading="lazy">
-            <div class="project-badge">
-              <span class="badge-dot"></span>
-              Season 9 Live
+            <div class="pcard-badge badge-live">
+              <span class="badge-dot"></span>Season 9 Live
             </div>
           </div>
-          <div class="project-content">
-            <h3 class="project-title">Project Survival S9</h3>
-            <p class="project-description">
-              Currently running Season 9 of our survival Minecraft server! A relaxed, community-focused server where you can build, explore, and play with everyone. Download our custom modpack for the best experience, or join vanilla. Come join us and be part of our friendly community.
+          <div class="pcard-body">
+            <h3 class="pcard-title">Project Survival S9</h3>
+            <p class="pcard-desc">
+              Currently running Season 9 of our Minecraft survival server — relaxed, community-focused,
+              and packed with a custom modpack. Build, explore, and play with everyone.
             </p>
-            <div class="project-features">
-              <span class="feature-tag">Custom Modpack</span>
-              <span class="feature-tag">Season 9</span>
-              <span class="feature-tag">UK Hosted</span>
+            <div class="pcard-tags">
+              <span class="tag">Custom Modpack</span>
+              <span class="tag">Season 9</span>
+              <span class="tag">UK Hosted</span>
             </div>
-            <div class="project-footer">
-              <a href="assets/cobble.mrpack" download class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                  <polyline points="7 10 12 15 17 10"></polyline>
-                  <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                Download Modpack
-              </a>
-              <a href="https://map.projectnetworks.co.uk" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-                View Server Map
-              </a>
-            </div>
+          </div>
+          <div class="pcard-footer">
+            <a href="assets/cobble.mrpack" download class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Modpack
+            </a>
+            <a href="https://map.projectnetworks.co.uk" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Server Map
+            </a>
           </div>
         </article>
 
-        <!-- More Games Coming Card -->
-        <article class="project-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="project-image">
-            <img src="assets/images/network.png" alt="More Games - Coming Soon" loading="lazy">
-            <div class="project-badge badge-new">
-              <span class="badge-dot"></span>
-              More Coming
+        <!-- More coming -->
+        <article class="pcard">
+          <div class="pcard-image">
+            <img src="assets/images/network.png" alt="More Games Coming Soon" loading="lazy">
+            <div class="pcard-badge badge-soon">
+              <span class="badge-dot badge-dot-amber"></span>More Coming
             </div>
           </div>
-          <div class="project-content">
-            <h3 class="project-title">Terraria & More</h3>
-            <p class="project-description">
-              We're expanding! Looking to add more games for the community including Terraria and other multiplayer favorites. Got suggestions? Let us know in Discord what you'd like to play!
+          <div class="pcard-body">
+            <h3 class="pcard-title">Terraria &amp; More</h3>
+            <p class="pcard-desc">
+              We're expanding! Terraria and other community multiplayer favourites are on the horizon.
+              Got suggestions? Jump in Discord and let us know.
             </p>
-            <div class="project-features">
-              <span class="feature-tag">Terraria</span>
-              <span class="feature-tag">Community Choice</span>
-              <span class="feature-tag">Coming Soon</span>
+            <div class="pcard-tags">
+              <span class="tag">Terraria</span>
+              <span class="tag">Community Choice</span>
+              <span class="tag">Coming Soon</span>
             </div>
-            <div class="project-footer">
-              <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                </svg>
-                Make a Suggestion
-              </a>
-            </div>
+          </div>
+          <div class="pcard-footer">
+            <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+              Make a Suggestion
+            </a>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects-section">
+  <!-- ============================
+       PROJECTS SECTION
+       ============================ -->
+  <section id="projects" class="cards-section reveal-section">
     <div class="container">
       <div class="section-header">
         <span class="section-label">Applications</span>
-        <h2 class="section-title">Our Projects</h2>
-        <p class="section-description">Free-to-use tools and applications built for the community</p>
+        <h2 class="section-title">Free Tools &amp; Projects</h2>
+        <p class="section-desc">Open-source applications built for the community</p>
       </div>
 
-      <div class="project-grid">
-        <!-- Project MOT Card -->
-        <article class="project-card" data-aos="fade-up">
-          <div class="project-image">
+      <div class="card-grid">
+        <!-- MOT Checker -->
+        <article class="pcard">
+          <div class="pcard-image">
             <img src="assets/images/mot.jpg" alt="Project MOT Checker" loading="lazy">
-            <div class="project-badge">
-              <span class="badge-dot"></span>
-              Live
+            <div class="pcard-badge badge-live">
+              <span class="badge-dot"></span>Live
             </div>
           </div>
-          <div class="project-content">
-            <h3 class="project-title">Project MOT</h3>
-            <p class="project-description">
-              A free-to-use, open source MOT checker that allows users to quickly and easily check the MOT status of any UK vehicle. Built with transparency and accessibility in mind, providing essential vehicle information to help keep UK roads safe.
+          <div class="pcard-body">
+            <h3 class="pcard-title">Project MOT</h3>
+            <p class="pcard-desc">
+              A free, open-source UK MOT checker. Instantly check the MOT status of any vehicle —
+              built with transparency and accessibility in mind.
             </p>
-            <div class="project-features">
-              <span class="feature-tag">Open Source</span>
-              <span class="feature-tag">Free Tool</span>
-              <span class="feature-tag">UK MOT Data</span>
-            </div>
-            <div class="project-footer">
-              <a href="https://mot.projectnetworks.co.uk" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-                Check MOT Status
-              </a>
+            <div class="pcard-tags">
+              <span class="tag">Open Source</span>
+              <span class="tag">Free Tool</span>
+              <span class="tag">UK MOT Data</span>
             </div>
           </div>
-        </article>
-
-        <!-- More Projects Coming Card -->
-        <article class="project-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="project-image">
-            <img src="assets/images/network.png" alt="More Projects - Coming Soon" loading="lazy">
-            <div class="project-badge badge-new">
-              <span class="badge-dot"></span>
-              Coming Soon
-            </div>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">More Tools Coming</h3>
-            <p class="project-description">
-              We're building more free tools and applications for the community. Have an idea for something useful? Let us know in Discord and we might build it!
-            </p>
-            <div class="project-features">
-              <span class="feature-tag">Community Driven</span>
-              <span class="feature-tag">Free Tools</span>
-              <span class="feature-tag">Open Source</span>
-            </div>
-            <div class="project-footer">
-              <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                </svg>
-                Share Your Ideas
-              </a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sister Sites Section -->
-  <section id="sister-sites" class="sister-sites-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">Community</span>
-        <h2 class="section-title">Sister Sites</h2>
-        <p class="section-description">Explore our network of related projects and services</p>
-      </div>
-
-      <div class="project-grid">
-        <!-- Photography Card -->
-        <article class="project-card" data-aos="fade-up">
-          <div class="project-image">
-            <img src="assets/images/photo.jpg" alt="Ben Foggon Photography" loading="lazy">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Ben Foggon Photography</h3>
-            <p class="project-description">
-              Explore stunning photography showcasing motorbikes and various subjects. Discover the creative work behind the lens.
-            </p>
-            <div class="project-footer">
-              <a href="https://photos.benfoggon.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                  <circle cx="12" cy="13" r="4"></circle>
-                </svg>
-                View Gallery
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Portfolio Card -->
-        <article class="project-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="project-image">
-            <img src="assets/images/BF.png" alt="Ben Foggon Portfolio" loading="lazy">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">My Portfolio</h3>
-            <p class="project-description">
-              Learn more about Ben Foggon's professional work, skills, and projects. Get in touch for collaborations or inquiries.
-            </p>
-            <div class="project-footer">
-              <a href="https://benfoggon.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-                Visit Portfolio
-              </a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="about-section">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-content" data-aos="fade-right">
-          <span class="section-label">About Us</span>
-          <h2 class="section-title">What is Project Networks?</h2>
-          <div class="about-text">
-            <p>
-              Project Networks is my UK-based platform where I build, host, and share projects with the community. From free tools like the MOT Checker to game servers like Minecraft Season, everything here is designed to be useful, fun, and accessible to everyone.
-            </p>
-            <p>
-              It's a space to showcase what I'm working on, whether that's web applications, helpful tools, or gaming servers. Each project is built with care and shared openly. If you have ideas or want to collaborate, feel free to reach out!
-            </p>
-          </div>
-          <div class="about-features">
-            <div class="feature-item">
-              <div class="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="16 18 22 12 16 6"></polyline>
-                  <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
-              </div>
-              <div class="feature-text">
-                <h4>Open Projects</h4>
-                <p>Free tools and applications for everyone</p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                </svg>
-              </div>
-              <div class="feature-text">
-                <h4>UK Hosted</h4>
-                <p>Fast, reliable hosting based in the UK</p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-              </div>
-              <div class="feature-text">
-                <h4>Community Driven</h4>
-                <p>Built for everyone, shaped by feedback</p>
-              </div>
-            </div>
-          </div>
-          <div class="about-cta">
-            <a href="https://benfoggon.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
-              Learn More About Me
+          <div class="pcard-footer">
+            <a href="https://mot.projectnetworks.co.uk" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Check MOT Status
             </a>
           </div>
-        </div>
-        <div class="about-visual" data-aos="fade-left">
-          <div class="visual-card">
-            <div class="visual-stat">
-              <div class="visual-stat-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="16 18 22 12 16 6"></polyline>
-                  <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
-              </div>
-              <div class="visual-stat-number">Multiple</div>
-              <div class="visual-stat-label">Live Projects</div>
+        </article>
+
+        <!-- More Tools -->
+        <article class="pcard">
+          <div class="pcard-image">
+            <img src="assets/images/network.png" alt="More Projects Coming Soon" loading="lazy">
+            <div class="pcard-badge badge-soon">
+              <span class="badge-dot badge-dot-amber"></span>Coming Soon
             </div>
           </div>
-          <div class="visual-card">
-            <div class="visual-stat">
-              <div class="visual-stat-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <div class="visual-stat-number">UK</div>
-              <div class="visual-stat-label">Hosted</div>
+          <div class="pcard-body">
+            <h3 class="pcard-title">More Tools Coming</h3>
+            <p class="pcard-desc">
+              New applications are always in development. Have an idea for something useful?
+              Drop it in Discord and it might get built.
+            </p>
+            <div class="pcard-tags">
+              <span class="tag">Community Driven</span>
+              <span class="tag">Free Tools</span>
+              <span class="tag">Open Source</span>
             </div>
+          </div>
+          <div class="pcard-footer">
+            <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+              Share Your Ideas
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       STATS BAR
+       ============================ -->
+  <section class="stats-section reveal-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-block">
+          <span class="stat-count" data-target="9">0</span>
+          <span class="stat-name">Minecraft Seasons</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-block">
+          <span class="stat-count" data-target="3">0</span>
+          <span class="stat-name">Live Projects</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-block">
+          <span class="stat-count" data-target="100">0</span>
+          <span class="stat-name">% Free to Use</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-block">
+          <span class="stat-count stat-text-only">UK</span>
+          <span class="stat-name">Server Location</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       SISTER SITES
+       ============================ -->
+  <section id="sister-sites" class="cards-section reveal-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Network</span>
+        <h2 class="section-title">Sister Sites</h2>
+        <p class="section-desc">Other corners of the Project Networks universe</p>
+      </div>
+
+      <div class="card-grid card-grid-2">
+        <article class="pcard">
+          <div class="pcard-image">
+            <img src="assets/images/photo.jpg" alt="Ben Foggon Photography" loading="lazy">
+          </div>
+          <div class="pcard-body">
+            <h3 class="pcard-title">Ben Foggon Photography</h3>
+            <p class="pcard-desc">Motorbikes, landscapes, and more. Explore the creative work behind the lens.</p>
+          </div>
+          <div class="pcard-footer">
+            <a href="https://photos.benfoggon.com" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">View Gallery</a>
+          </div>
+        </article>
+
+        <article class="pcard">
+          <div class="pcard-image">
+            <img src="assets/images/BF.png" alt="Ben Foggon Portfolio" loading="lazy">
+          </div>
+          <div class="pcard-body">
+            <h3 class="pcard-title">My Portfolio</h3>
+            <p class="pcard-desc">Professional work, skills, and projects. Get in touch for collaborations.</p>
+          </div>
+          <div class="pcard-footer">
+            <a href="https://benfoggon.com" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Visit Portfolio</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       ABOUT SECTION
+       ============================ -->
+  <section id="about" class="about-section reveal-section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-copy">
+          <span class="section-label">About</span>
+          <h2 class="section-title">What is Project Networks?</h2>
+          <p>
+            Project Networks is my UK-based platform where I build, host, and share projects with the community.
+            From free tools like the MOT Checker to game servers like Minecraft Season, everything here is
+            designed to be useful, fun, and accessible.
+          </p>
+          <p>
+            It's a space to showcase what I'm working on — web apps, helpful tools, gaming servers, and now
+            the Project Launcher. Each project is built with care and shared openly. Have ideas? Reach out!
+          </p>
+          <div class="about-features">
+            <div class="af-item">
+              <span class="af-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </span>
+              <div>
+                <strong>Open Projects</strong>
+                <span>Free tools and applications for everyone</span>
+              </div>
+            </div>
+            <div class="af-item">
+              <span class="af-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </span>
+              <div>
+                <strong>UK Hosted</strong>
+                <span>Fast, reliable servers based in the UK</span>
+              </div>
+            </div>
+            <div class="af-item">
+              <span class="af-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </span>
+              <div>
+                <strong>Community Driven</strong>
+                <span>Built for everyone, shaped by feedback</span>
+              </div>
+            </div>
+          </div>
+          <a href="https://benfoggon.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="margin-top:2rem">
+            About the Creator
+          </a>
+        </div>
+        <div class="about-visual">
+          <div class="av-card av-card-1">
+            <div class="av-icon">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div class="av-num" data-target="9">0</div>
+            <div class="av-label">Seasons Completed</div>
+          </div>
+          <div class="av-card av-card-2">
+            <div class="av-icon">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="av-num av-text">UK</div>
+            <div class="av-label">Server Location</div>
+          </div>
+          <div class="av-card av-card-3">
+            <div class="av-icon">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="av-num av-text">Free</div>
+            <div class="av-label">Always Free to Use</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="cta-section">
+  <!-- ============================
+       CTA SECTION
+       ============================ -->
+  <section class="cta-section reveal-section">
     <div class="container">
-      <div class="cta-content" data-aos="zoom-in">
+      <div class="cta-inner">
         <h2 class="cta-title">Want to Get Involved?</h2>
-        <p class="cta-text">Join our Discord community to stay updated with new projects, share ideas, or just hang out with like-minded people.</p>
+        <p class="cta-desc">Join our Discord community to stay updated, share ideas, or just hang out with like-minded people.</p>
         <div class="cta-actions">
-          <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large btn-glow">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-            </svg>
+          <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg btn-glow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
             Join Our Discord
           </a>
-          <a href="mailto:contact@projectnetworks.co.uk" class="btn btn-outline btn-large">
+          <a href="mailto:contact@projectnetworks.co.uk" class="btn btn-ghost btn-lg">
             Email Us
           </a>
         </div>
@@ -629,37 +865,38 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ============================
+       FOOTER
+       ============================ -->
   <footer class="main-footer" role="contentinfo">
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-col">
+        <div class="footer-brand">
           <div class="footer-logo">
-            <span class="logo-text">Project Networks</span>
+            <span class="logo-icon">PN</span>
+            <span class="logo-name">Project Networks</span>
             <span class="logo-badge">UK</span>
           </div>
-          <p class="footer-description">A UK-based platform showcasing web projects, free tools, and game servers. Built by Ben Foggon for the community.</p>
+          <p>A UK-based platform by Ben Foggon — web projects, free tools, and game servers for the community.</p>
           <div class="footer-social">
-            <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" aria-label="Discord" class="social-link">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-              </svg>
+            <a href="https://discord.gg/3nyGVhD23c" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
             </a>
           </div>
         </div>
         <div class="footer-col">
-          <h3 class="footer-heading">Quick Links</h3>
-          <ul class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
             <li><a href="#home">Home</a></li>
+            <li><a href="#launcher">Project Launcher</a></li>
             <li><a href="#servers">Game Servers</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="https://benfoggon.com" target="_blank" rel="noopener noreferrer">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h3 class="footer-heading">Our Services</h3>
-          <ul class="footer-links">
+          <h4>Services</h4>
+          <ul>
             <li><a href="https://map.projectnetworks.co.uk" target="_blank" rel="noopener noreferrer">Project Survival S9</a></li>
             <li><a href="https://mot.projectnetworks.co.uk" target="_blank" rel="noopener noreferrer">MOT Checker</a></li>
             <li><a href="download.html">Downloads</a></li>
@@ -667,65 +904,36 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h3 class="footer-heading">Get in Touch</h3>
-          <ul class="footer-contact">
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-              <a href="mailto:contact@projectnetworks.co.uk">contact@projectnetworks.co.uk</a>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              <span>United Kingdom</span>
-            </li>
+          <h4>Get in Touch</h4>
+          <ul>
+            <li><a href="mailto:contact@projectnetworks.co.uk">contact@projectnetworks.co.uk</a></li>
+            <li><span>United Kingdom</span></li>
           </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-copyright">
-          © 2025 Project Networks. All rights reserved. | Built by <a href="https://benfoggon.com" target="_blank" rel="noopener noreferrer">Ben Foggon</a>
-        </div>
-        <div class="footer-legal">
-          <a href="#privacy">Privacy Policy</a>
-          <span>•</span>
-          <a href="#terms">Terms of Service</a>
-          <span>•</span>
-          <div style="display: inline-block; vertical-align: middle;">
+          <div class="footer-kofi">
             <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
             <script type='text/javascript'>kofiwidget2.init('Support me on Ko-fi', '#72a4f2', 'U7U11QFY9B');kofiwidget2.draw();</script>
           </div>
         </div>
       </div>
+      <div class="footer-bottom">
+        <span>© 2026 Project Networks. All rights reserved. Built by <a href="https://benfoggon.com" target="_blank" rel="noopener noreferrer">Ben Foggon</a>.</span>
+        <div class="footer-legal">
+          <a href="#privacy">Privacy Policy</a>
+          <span>·</span>
+          <a href="#terms">Terms of Service</a>
+        </div>
+      </div>
     </div>
   </footer>
 
-  <!-- Back to Top Button -->
-  <button id="backToTop" class="back-to-top" aria-label="Back to top">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
+  <!-- Back to Top -->
+  <button id="backToTop" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
   </button>
 
   <!-- Scripts -->
   <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" crossorigin="anonymous"></script>
   <script src="scripts/main.js"></script>
-  
-  <!-- AOS Animation Library -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 800,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 100
-    });
-  </script>
 </body>
 </html>
