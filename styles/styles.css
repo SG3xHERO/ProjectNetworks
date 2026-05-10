@@ -133,7 +133,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .orb-1 {
   width: 700px; height: 700px;
   background: radial-gradient(circle, #a855f7 0%, transparent 70%);
-  top: -250px; right: -200px;
+  top: -500px; right: -200px;
 }
 
 .orb-2 {
@@ -260,6 +260,7 @@ section { position: relative; }
 }
 
 .nav-container {
+  position: relative;
   width: 100%;
   max-width: var(--max-w);
   margin: 0 auto;
@@ -386,7 +387,7 @@ section { position: relative; }
 .site-dropdown .dropdown-title { font-size: 0.9rem; font-weight: 600; color: var(--t-primary); }
 .site-dropdown .dropdown-description { font-size: 0.75rem; color: var(--t-subtle); }
 
-
+.nav-links {
   display: flex;
   align-items: center;
   gap: var(--space-1);
