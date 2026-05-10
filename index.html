@@ -249,8 +249,45 @@
       <a href="index.html" class="logo" aria-label="Project Networks Home">
         <span class="logo-icon">PN</span>
         <span class="logo-name">Project Networks</span>
-        <span class="logo-badge">UK</span>
+        <span class="logo-badge" id="site-dropdown-trigger">
+          UK
+          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="dropdown-arrow" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </span>
       </a>
+
+      <!-- Site Switcher Dropdown -->
+      <div class="site-dropdown" id="site-dropdown" role="menu">
+        <a href="https://benfoggon.com" target="_blank" rel="noopener" class="dropdown-item" role="menuitem">
+          <div class="dropdown-item-content">
+            <div class="dropdown-icon drop-portfolio-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+            </div>
+            <div class="dropdown-text">
+              <div class="dropdown-title">Portfolio</div>
+              <div class="dropdown-description">Professional work &amp; projects</div>
+            </div>
+          </div>
+        </a>
+        <a href="https://photos.benfoggon.com" target="_blank" rel="noopener" class="dropdown-item" role="menuitem">
+          <div class="dropdown-item-content">
+            <div class="dropdown-icon drop-photo-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </div>
+            <div class="dropdown-text">
+              <div class="dropdown-title">Photography</div>
+              <div class="dropdown-description">Motorcycle photography portfolio</div>
+            </div>
+          </div>
+        </a>
+      </div>
       <div class="nav-links" id="nav-links">
         <a href="#home" class="nav-link active">Home</a>
         <a href="#launcher" class="nav-link">Launcher</a>

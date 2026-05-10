@@ -296,6 +296,29 @@
     const toggle = document.getElementById('nav-toggle');
     const links  = document.getElementById('nav-links');
 
+    // Site switcher dropdown
+    const dropTrigger = document.getElementById('site-dropdown-trigger');
+    const dropdown    = document.getElementById('site-dropdown');
+    let dropTimer;
+
+    if (dropTrigger && dropdown) {
+      dropTrigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        dropdown.classList.toggle('active');
+      });
+      const logoEl = dropTrigger.closest('.logo');
+      if (logoEl) {
+        logoEl.addEventListener('mouseenter', function () { clearTimeout(dropTimer); dropdown.classList.add('active'); });
+        logoEl.addEventListener('mouseleave', function () { dropTimer = setTimeout(function () { dropdown.classList.remove('active'); }, 200); });
+      }
+      dropdown.addEventListener('mouseenter', function () { clearTimeout(dropTimer); });
+      dropdown.addEventListener('mouseleave', function () { dropTimer = setTimeout(function () { dropdown.classList.remove('active'); }, 200); });
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.logo') && !e.target.closest('.site-dropdown')) dropdown.classList.remove('active');
+      });
+    }
+
     // Scroll: glass nav
     window.addEventListener('scroll', function () {
       if (window.scrollY > 40) {
